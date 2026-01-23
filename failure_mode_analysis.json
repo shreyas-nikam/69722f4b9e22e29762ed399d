@@ -1,0 +1,122 @@
+{
+    "use_case": {
+        "name": "Steam Turbine Bearing & Rotor Blade RUL Prediction",
+        "equipment": "High-Pressure Steam Turbine (Unit 3)",
+        "criticality": "High - Direct impact on production, safety, and operational costs",
+        "ai_function": "Predict Remaining Useful Life (RUL) of bearings and rotor blades based on vibration, temperature, pressure, and lubrication sensor data.",
+        "sensors": [
+            "Vibration_X",
+            "Vibration_Y",
+            "Temperature_Bearing",
+            "Pressure_Inlet",
+            "Oil_Viscosity"
+        ]
+    },
+    "identified_ai_failure_modes": [
+        {
+            "id": "AI001",
+            "name": "Sensor Data Corruption",
+            "category": "Data",
+            "description": "Corrupted or noisy sensor data (e.g., vibration, temperature) fed into the AI model, leading to inaccurate RUL predictions.",
+            "related_template_impacts": [
+                "ENG001",
+                "ENG002"
+            ]
+        },
+        {
+            "id": "AI002",
+            "name": "Model Drift (False Negatives)",
+            "category": "Model",
+            "description": "AI model's performance degrades over time, consistently underestimating degradation, leading to missed critical maintenance. High RUL_pred when RUL_true is low.",
+            "related_template_impacts": [
+                "ENG001",
+                "ENG002"
+            ]
+        },
+        {
+            "id": "AI003",
+            "name": "Model Drift (False Positives)",
+            "category": "Model",
+            "description": "AI model overestimates degradation, triggering unnecessary maintenance alerts and shutdowns. Low RUL_pred when RUL_true is high.",
+            "related_template_impacts": [
+                "INF002_conceptual_production_impact"
+            ]
+        },
+        {
+            "id": "AI004",
+            "name": "Inference Latency Spike",
+            "category": "Infrastructure",
+            "description": "Delays in AI model predictions, causing alerts to be delivered too late for proactive action.",
+            "related_template_impacts": [
+                "INF001"
+            ]
+        },
+        {
+            "id": "AI005",
+            "name": "Data Pipeline Failure",
+            "category": "Data",
+            "description": "Failure to deliver sensor data to the AI model, resulting in no predictions or stale predictions.",
+            "related_template_impacts": [
+                "INF001"
+            ]
+        },
+        {
+            "id": "AI006",
+            "name": "Feature Engineering Error",
+            "category": "Data",
+            "description": "Errors in transforming raw sensor data into features for the AI model, leading to poor model performance.",
+            "related_template_impacts": [
+                "AI002",
+                "AI003"
+            ]
+        }
+    ],
+    "engineering_templates_used": {
+        "categories": [
+            "Mechanical",
+            "Electrical",
+            "Software"
+        ],
+        "failures": [
+            {
+                "id": "ENG001",
+                "name": "Bearing Wear",
+                "category": "Mechanical",
+                "description": "Progressive degradation of turbine bearings."
+            },
+            {
+                "id": "ENG002",
+                "name": "Rotor Imbalance",
+                "category": "Mechanical",
+                "description": "Unbalanced rotation causing vibration."
+            },
+            {
+                "id": "ENG003",
+                "name": "Sensor Malfunction",
+                "category": "Electrical",
+                "description": "Inaccurate or missing sensor readings."
+            }
+        ]
+    },
+    "infrastructure_templates_used": {
+        "categories": [
+            "Network",
+            "Compute",
+            "Storage"
+        ],
+        "failures": [
+            {
+                "id": "INF001",
+                "name": "Network Latency Spike",
+                "category": "Network",
+                "description": "Delay in data transmission to/from AI service."
+            },
+            {
+                "id": "INF002",
+                "name": "Inference Engine Crash",
+                "category": "Compute",
+                "description": "AI model serving infrastructure failure."
+            }
+        ]
+    }
+}

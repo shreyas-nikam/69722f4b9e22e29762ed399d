@@ -1,0 +1,51 @@
+{
+    "recovery_objectives": {
+        "RTO_AI_Service_Degraded_Mode": "2 hours",
+        "RTO_AI_Service_Full_Functionality": "8 hours",
+        "RPO_AI_Data_for_Retraining": "30 minutes",
+        "RPO_AI_Inference_State": "10 minutes"
+    },
+    "rollback_triggers": [
+        {
+            "id": "RT001",
+            "name": "Sustained Model Performance Degradation",
+            "description": "AI model's MAE for RUL prediction exceeds 1.5 times the baseline for 30 consecutive minutes.",
+            "metric": "MAE",
+            "threshold_multiplier": 1.5,
+            "duration_minutes": 30
+        },
+        {
+            "id": "RT002",
+            "name": "Data Pipeline Ingestion Stoppage",
+            "description": "No new sensor data ingested into the AI feature store for 15 minutes.",
+            "metric": "Data Ingestion Rate",
+            "threshold_value": 0,
+            "duration_minutes": 15
+        },
+        {
+            "id": "RT003",
+            "name": "Excessive Inference Latency",
+            "description": "Average inference latency for RUL predictions exceeds 500ms for 5 consecutive minutes.",
+            "metric": "Latency",
+            "threshold_ms": 500,
+            "duration_minutes": 5
+        }
+    ],
+    "validation_for_re_enablement": [
+        {
+            "step": "1",
+            "description": "AI Model Performance: MAE within 1.1x baseline and no significant drift for 24 hours.",
+            "metric_kpi": "Model_MAE_Stability"
+        },
+        {
+            "step": "2",
+            "description": "Data Pipeline Health: 99.9% data ingestion success rate and no errors for 12 hours.",
+            "metric_kpi": "Data_Pipeline_Health"
+        },
+        {
+            "step": "3",
+            "description": "Inference Infrastructure Stability: Average inference latency below 200ms and 99.9% uptime for 48 hours.",
+            "metric_kpi": "Inference_Stability"
+        }
+    ]
+}

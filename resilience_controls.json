@@ -1,0 +1,266 @@
+{
+    "defined_controls": [
+        {
+            "id": "RC001",
+            "name": "Shadow Model Deployment",
+            "type": "Redundancy",
+            "description": "Deploy a redundant AI model (e.g., previous stable version or simpler heuristic) running in parallel, used for anomaly detection and potential fallback.",
+            "applies_to_categories": [
+                "Model"
+            ]
+        },
+        {
+            "id": "RC002",
+            "name": "Automatic Fallback to Scheduled Maintenance",
+            "type": "Graceful Degradation",
+            "description": "If AI prediction confidence drops or system fails, automatically revert to a time-based or usage-based scheduled maintenance regime for critical components.",
+            "applies_to_categories": [
+                "Model",
+                "Data",
+                "Infrastructure"
+            ]
+        },
+        {
+            "id": "RC003",
+            "name": "Human Expert Alert Queue",
+            "type": "Manual Override",
+            "description": "Route high-severity or uncertain AI alerts to a human expert queue for manual review and decision-making.",
+            "applies_to_categories": [
+                "Model",
+                "Data"
+            ]
+        },
+        {
+            "id": "RC004",
+            "name": "Sensor Data Anomaly Detection (Preprocessing)",
+            "type": "Data Validation",
+            "description": "Implement anomaly detection algorithms on raw sensor data streams to detect corruption or outliers before feeding to the main AI model.",
+            "applies_to_categories": [
+                "Data"
+            ]
+        },
+        {
+            "id": "RC005",
+            "name": "Model Performance Monitoring & Alerting",
+            "type": "Monitoring",
+            "description": "Continuously monitor AI model's prediction drift, accuracy metrics, and inference latency, with automated alerts for degradation.",
+            "applies_to_categories": [
+                "Model",
+                "Infrastructure"
+            ]
+        },
+        {
+            "id": "RC006",
+            "name": "Data Pipeline Health Checks",
+            "type": "Infrastructure Monitoring",
+            "description": "Regular health checks and monitoring for data ingestion and feature engineering pipelines, ensuring data flow integrity.",
+            "applies_to_categories": [
+                "Data",
+                "Infrastructure"
+            ]
+        },
+        {
+            "id": "RC007",
+            "name": "Revert to Heuristic-Based Prediction",
+            "type": "Fallback",
+            "description": "In case of primary AI model failure or severe degradation, switch to a simpler, rule-based heuristic for RUL prediction (e.g., based on fixed thresholds).",
+            "applies_to_categories": [
+                "Model"
+            ]
+        }
+    ],
+    "mapped_controls_to_failure_modes": [
+        {
+            "failure_mode_id": "AI001",
+            "failure_mode_name": "Sensor Data Corruption",
+            "failure_mode_category": "Data",
+            "applicable_controls": [
+                {
+                    "control_id": "RC002",
+                    "control_name": "Automatic Fallback to Scheduled Maintenance",
+                    "control_type": "Graceful Degradation",
+                    "description": "If AI prediction confidence drops or system fails, automatically revert to a time-based or usage-based scheduled maintenance regime for critical components."
+                },
+                {
+                    "control_id": "RC003",
+                    "control_name": "Human Expert Alert Queue",
+                    "control_type": "Manual Override",
+                    "description": "Route high-severity or uncertain AI alerts to a human expert queue for manual review and decision-making."
+                },
+                {
+                    "control_id": "RC004",
+                    "control_name": "Sensor Data Anomaly Detection (Preprocessing)",
+                    "control_type": "Data Validation",
+                    "description": "Implement anomaly detection algorithms on raw sensor data streams to detect corruption or outliers before feeding to the main AI model."
+                },
+                {
+                    "control_id": "RC006",
+                    "control_name": "Data Pipeline Health Checks",
+                    "control_type": "Infrastructure Monitoring",
+                    "description": "Regular health checks and monitoring for data ingestion and feature engineering pipelines, ensuring data flow integrity."
+                }
+            ]
+        },
+        {
+            "failure_mode_id": "AI002",
+            "failure_mode_name": "Model Drift (False Negatives)",
+            "failure_mode_category": "Model",
+            "applicable_controls": [
+                {
+                    "control_id": "RC001",
+                    "control_name": "Shadow Model Deployment",
+                    "control_type": "Redundancy",
+                    "description": "Deploy a redundant AI model (e.g., previous stable version or simpler heuristic) running in parallel, used for anomaly detection and potential fallback."
+                },
+                {
+                    "control_id": "RC002",
+                    "control_name": "Automatic Fallback to Scheduled Maintenance",
+                    "control_type": "Graceful Degradation",
+                    "description": "If AI prediction confidence drops or system fails, automatically revert to a time-based or usage-based scheduled maintenance regime for critical components."
+                },
+                {
+                    "control_id": "RC003",
+                    "control_name": "Human Expert Alert Queue",
+                    "control_type": "Manual Override",
+                    "description": "Route high-severity or uncertain AI alerts to a human expert queue for manual review and decision-making."
+                },
+                {
+                    "control_id": "RC005",
+                    "control_name": "Model Performance Monitoring & Alerting",
+                    "control_type": "Monitoring",
+                    "description": "Continuously monitor AI model's prediction drift, accuracy metrics, and inference latency, with automated alerts for degradation."
+                },
+                {
+                    "control_id": "RC007",
+                    "control_name": "Revert to Heuristic-Based Prediction",
+                    "control_type": "Fallback",
+                    "description": "In case of primary AI model failure or severe degradation, switch to a simpler, rule-based heuristic for RUL prediction (e.g., based on fixed thresholds)."
+                }
+            ]
+        },
+        {
+            "failure_mode_id": "AI003",
+            "failure_mode_name": "Model Drift (False Positives)",
+            "failure_mode_category": "Model",
+            "applicable_controls": [
+                {
+                    "control_id": "RC001",
+                    "control_name": "Shadow Model Deployment",
+                    "control_type": "Redundancy",
+                    "description": "Deploy a redundant AI model (e.g., previous stable version or simpler heuristic) running in parallel, used for anomaly detection and potential fallback."
+                },
+                {
+                    "control_id": "RC002",
+                    "control_name": "Automatic Fallback to Scheduled Maintenance",
+                    "control_type": "Graceful Degradation",
+                    "description": "If AI prediction confidence drops or system fails, automatically revert to a time-based or usage-based scheduled maintenance regime for critical components."
+                },
+                {
+                    "control_id": "RC003",
+                    "control_name": "Human Expert Alert Queue",
+                    "control_type": "Manual Override",
+                    "description": "Route high-severity or uncertain AI alerts to a human expert queue for manual review and decision-making."
+                },
+                {
+                    "control_id": "RC005",
+                    "control_name": "Model Performance Monitoring & Alerting",
+                    "control_type": "Monitoring",
+                    "description": "Continuously monitor AI model's prediction drift, accuracy metrics, and inference latency, with automated alerts for degradation."
+                },
+                {
+                    "control_id": "RC007",
+                    "control_name": "Revert to Heuristic-Based Prediction",
+                    "control_type": "Fallback",
+                    "description": "In case of primary AI model failure or severe degradation, switch to a simpler, rule-based heuristic for RUL prediction (e.g., based on fixed thresholds)."
+                }
+            ]
+        },
+        {
+            "failure_mode_id": "AI004",
+            "failure_mode_name": "Inference Latency Spike",
+            "failure_mode_category": "Infrastructure",
+            "applicable_controls": [
+                {
+                    "control_id": "RC002",
+                    "control_name": "Automatic Fallback to Scheduled Maintenance",
+                    "control_type": "Graceful Degradation",
+                    "description": "If AI prediction confidence drops or system fails, automatically revert to a time-based or usage-based scheduled maintenance regime for critical components."
+                },
+                {
+                    "control_id": "RC005",
+                    "control_name": "Model Performance Monitoring & Alerting",
+                    "control_type": "Monitoring",
+                    "description": "Continuously monitor AI model's prediction drift, accuracy metrics, and inference latency, with automated alerts for degradation."
+                },
+                {
+                    "control_id": "RC006",
+                    "control_name": "Data Pipeline Health Checks",
+                    "control_type": "Infrastructure Monitoring",
+                    "description": "Regular health checks and monitoring for data ingestion and feature engineering pipelines, ensuring data flow integrity."
+                }
+            ]
+        },
+        {
+            "failure_mode_id": "AI005",
+            "failure_mode_name": "Data Pipeline Failure",
+            "failure_mode_category": "Data",
+            "applicable_controls": [
+                {
+                    "control_id": "RC002",
+                    "control_name": "Automatic Fallback to Scheduled Maintenance",
+                    "control_type": "Graceful Degradation",
+                    "description": "If AI prediction confidence drops or system fails, automatically revert to a time-based or usage-based scheduled maintenance regime for critical components."
+                },
+                {
+                    "control_id": "RC003",
+                    "control_name": "Human Expert Alert Queue",
+                    "control_type": "Manual Override",
+                    "description": "Route high-severity or uncertain AI alerts to a human expert queue for manual review and decision-making."
+                },
+                {
+                    "control_id": "RC004",
+                    "control_name": "Sensor Data Anomaly Detection (Preprocessing)",
+                    "control_type": "Data Validation",
+                    "description": "Implement anomaly detection algorithms on raw sensor data streams to detect corruption or outliers before feeding to the main AI model."
+                },
+                {
+                    "control_id": "RC006",
+                    "control_name": "Data Pipeline Health Checks",
+                    "control_type": "Infrastructure Monitoring",
+                    "description": "Regular health checks and monitoring for data ingestion and feature engineering pipelines, ensuring data flow integrity."
+                }
+            ]
+        },
+        {
+            "failure_mode_id": "AI006",
+            "failure_mode_name": "Feature Engineering Error",
+            "failure_mode_category": "Data",
+            "applicable_controls": [
+                {
+                    "control_id": "RC002",
+                    "control_name": "Automatic Fallback to Scheduled Maintenance",
+                    "control_type": "Graceful Degradation",
+                    "description": "If AI prediction confidence drops or system fails, automatically revert to a time-based or usage-based scheduled maintenance regime for critical components."
+                },
+                {
+                    "control_id": "RC003",
+                    "control_name": "Human Expert Alert Queue",
+                    "control_type": "Manual Override",
+                    "description": "Route high-severity or uncertain AI alerts to a human expert queue for manual review and decision-making."
+                },
+                {
+                    "control_id": "RC004",
+                    "control_name": "Sensor Data Anomaly Detection (Preprocessing)",
+                    "control_type": "Data Validation",
+                    "description": "Implement anomaly detection algorithms on raw sensor data streams to detect corruption or outliers before feeding to the main AI model."
+                },
+                {
+                    "control_id": "RC006",
+                    "control_name": "Data Pipeline Health Checks",
+                    "control_type": "Infrastructure Monitoring",
+                    "description": "Regular health checks and monitoring for data ingestion and feature engineering pipelines, ensuring data flow integrity."
+                }
+            ]
+        }
+    ]
+}
